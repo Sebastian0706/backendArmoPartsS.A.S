@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllA } from "../Controller/CiudadController.js";
+import { getAllA } from "../Controller/AutoparteController.js";
 const router = express.Router();
 
 router.get('/listarc', getAllA);

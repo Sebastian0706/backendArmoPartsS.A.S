@@ -7,14 +7,14 @@ const StringConnection = {
     password: process.env.PASSWORD,
     server: process.env.SERVER,
     database: process.env.DATABASE,
-    Options:
+    options:
     {
         trustServerCertificate: true,
 
     },
 };
 
-const getConnection = async ()=>{
+const getConnection = async () => {
 
     try {
         await sql.connect(StringConnection);
@@ -25,4 +25,4 @@ const getConnection = async ()=>{
     }
 }
 
-export {sql , getConnection}
+export { sql, getConnection }
