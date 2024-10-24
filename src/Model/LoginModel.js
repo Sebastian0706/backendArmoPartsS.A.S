@@ -1,22 +1,25 @@
-import { sql } from "../Config/Connection.js";
+import { getConnection, sql } from "../Config/Connection.js";
 
 
-const login = async (usuario, contraseña) => {
+const authenticateUser = async (usuario, contrasena) => {
     try {
+        const pool = await sql.connect();
+        const query = `
+            SELECT *
+            FROM Usuario
+            WHERE Usuario = @usuario AND Contrasena = @contrasena
+        `;
 
-        const result = await sql.query(`SELECT * FROM Usuario WHERE Usuario ='${usuario}' and Contraseña='${contraseña}'`);
-       
-        if (result.length < 0) {
+        const request = pool.request()
+        request.input('usuario', sql.VarChar, usuario);
+        request.input('contrasena', sql.VarChar, contrasena);
 
-            return false;
-        }
-
+        const result = await request.query(query);
         return result.recordset;
-
-    }
-    catch (error) {
+    } catch (error) {
+        console.error("Error en getUsuarioByCredenciales:", error);
         throw error;
     }
 }
 
-export { login }
+export { authenticateUser };
