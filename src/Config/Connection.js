@@ -13,7 +13,7 @@ const StringConnection = {
 
     },
 };
-
+/* 
 const getConnection = async () => {
 
     try {
@@ -23,6 +23,13 @@ const getConnection = async () => {
         console.log('Error: ', error);
         process.exit(1);
     }
-}
+}*/
+const getConnection = new sql.ConnectionPool(StringConnection)
+    .connect()
+    .then(pool => {
+        console.log('Conectados')
+        return pool
+    })
+    .catch(err => console.log('Error de conexion a la bd', err))
 
 export { sql, getConnection }

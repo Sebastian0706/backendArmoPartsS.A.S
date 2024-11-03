@@ -20,7 +20,7 @@ app.get('/listarE', router3);
 app.get('/listarP', router4); 
 app.use('/', router2);
 app.listen(process.env.PORT, () => {
-    getConnection();
+   
     console.log(`Servidor conectado en el puerto ${process.env.PORT}`)
 })
 
